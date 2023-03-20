@@ -84,7 +84,7 @@ public class Practice3 {
 				cnt[s2.charAt(i - s1.length()) - 'a']++;
 			}
 
-			 isZero = true;
+			isZero = true;
 			for (int j = 0; j < ALPHABET; j++) {
 				if (cnt[j] != 0) {
 					isZero = false;
