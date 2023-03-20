@@ -17,19 +17,19 @@ public class Practice3 {
 		String s1 = "ab";
 		String s2 = "adbak";
 		System.out.println(solution(s1, s2));
-//		System.out.println(solution2(s1, s2));
+		System.out.println(solution2(s1, s2));
 		System.out.println();
 
 		s1 = "ac";
 		s2 = "car";
 		System.out.println(solution(s1, s2));
-//		System.out.println(solution2(s1, s2));
+		System.out.println(solution2(s1, s2));
 		System.out.println();
 
 		s1 = "ak";
 		s2 = "aabbkk";
 		System.out.println(solution(s1, s2));
-//		System.out.println(solution2(s1, s2));
+		System.out.println(solution2(s1, s2));
 	}
 
 	public static boolean solution(String s1, String s2) {
@@ -61,5 +61,42 @@ public class Practice3 {
 				visited[i] = false;
 			}
 		}
+	}
+
+	// s1이 s2에서 순서 상관없이 인접한지 counting 하여 구현
+	public static boolean solution2(String s1, String s2) {
+		final int ALPHABET = 26;
+
+		if (s1.length() > s2.length()) {
+			return false;
+		}
+
+		int[] cnt = new int[ALPHABET];
+		for (int i = 0; i < s1.length(); i++) {
+			cnt[s1.charAt(i) - 'a']++;
+		}
+
+		boolean isZero;
+		for (int i = 0; i < s2.length(); i++) {
+			cnt[s2.charAt(i) - 'a']--;
+
+			if (i - s1.length() >= 0) { // 인접하지 않은 것은 다시 원상태로 복귀
+				cnt[s2.charAt(i - s1.length()) - 'a']++;
+			}
+
+			 isZero = true;
+			for (int j = 0; j < ALPHABET; j++) {
+				if (cnt[j] != 0) {
+					isZero = false;
+					break;
+				}
+			}
+
+			if (isZero) {
+				return true;
+			}
+		}
+
+		return false;
 	}
 }
